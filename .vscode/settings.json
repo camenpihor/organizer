@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/camen/Documents/Personal/organizer/.tox/py36/bin/python3"
+    "python.pythonPath": "/Users/camen/Documents/Personal/organizer/.tox/py36/bin/python3",
+    "python.formatting.provider": "black"
 }

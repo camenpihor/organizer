@@ -1,0 +1,5 @@
+django ~= 2.1
+psycopg2 ~= 2.7
+flake8 ~= 3.5.0
+pylint ~= 2.1
+pillow ~= 5.2
