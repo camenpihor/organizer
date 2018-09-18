@@ -32,7 +32,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'web_app', 'static', 'html')
+            os.path.join('web_app', 'static', 'html')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
