@@ -6,6 +6,9 @@ class Question(models.Model):
     created_at_utc = models.DateTimeField(auto_now_add=True)
     question = models.TextField()
 
+    def get_resources(self):
+        
+
     class Meta:
         db_table = "questions"
 
@@ -16,7 +19,7 @@ class Resource(models.Model):
     resource_title = models.TextField()
     url = models.URLField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
-    other = models.TextField()
+    other = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 

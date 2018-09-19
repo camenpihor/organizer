@@ -2,13 +2,20 @@
 <html>
 
 <head>
-    {% load static %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/normalize_browser.css' %}" />
-    <title> Organizer </title>
+    <title> Organizer | {{ page_name }} </title>
 </head>
 
 <body>
-    Hai
+    Questions
+    <ul id="questions">
+        {% for question in questions %}
+            <li class="question">
+                [ {{ question.created_at_utc|date:"m/d/y" }} ]
+                {{ question.question }}
+                Resources: {{ resources.count }}
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>
