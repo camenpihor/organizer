@@ -7,7 +7,7 @@ class Question(models.Model):
     question = models.TextField()
 
     def get_resources(self):
-        
+        return Resource.objects.filter(question=self)
 
     class Meta:
         db_table = "questions"
