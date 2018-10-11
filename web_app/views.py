@@ -6,7 +6,7 @@ from web_app.models import Question
 
 def home(request):
     context = {'page_name': 'Home'}
-    context['questions'] = np.random.choice(Question.objects.all(), size=5, replace=Falset)
+    context['questions'] = np.random.choice(Question.objects.all(), size=5, replace=False)
     return render(request, 'base.html', context)
 
 
