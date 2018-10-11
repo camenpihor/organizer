@@ -1,4 +1,4 @@
-django ~= 2.1
+django >= 2.1.2  # vulnerability found in 2.1.1
 psycopg2 ~= 2.7
 flake8 ~= 3.5.0
 pylint ~= 2.1
