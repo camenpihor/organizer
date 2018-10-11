@@ -5,7 +5,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    os.environ['MAIN_IP_ADDERSS']
+    os.environ['MAIN_IP_ADDRESS'],
     '127.0.0.1',
     'localhost'
 ]
