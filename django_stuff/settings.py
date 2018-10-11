@@ -5,8 +5,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '192.168.1.109',
-    '142.93.117.57',
+    os.environ['MAIN_IP_ADDERSS']
+    '127.0.0.1',
     'localhost'
 ]
 
@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web_app.apps.WebAppConfig',
+    'organizer.apps.OrganizerConfig',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +35,7 @@ ROOT_URLCONF = 'django_stuff.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join('web_app', 'static', 'html')],
+        'DIRS': [os.path.join('organizer', 'static', 'html')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,5 +69,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join('web_app', 'static')
+    os.path.join('organizer', 'static')
 ]

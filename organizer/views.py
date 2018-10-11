@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import numpy as np
 
-from web_app.models import Question
+from organizer.models import Question
 
 
 def home(request):
