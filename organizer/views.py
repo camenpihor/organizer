@@ -23,7 +23,7 @@ def stats(request):
 
 def create(request):
     context = {'page_name': 'Create'}
-    return render(request, 'base.html', context)
+    return render(request, 'create.html', context)
 
 
 def question(request, question_id):

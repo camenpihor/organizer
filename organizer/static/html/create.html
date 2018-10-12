@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/create.css' %}" />
+<form id="question-form" method="post" action={% url 'create' %}>
+    <h1>New Question</h1>
+
+    <h2>Question</h2>
+    <textarea name="question-text" id="question-text" placeholder="What is your question?" autofocus required></textarea>
+
+    <h2>Resource <button type="button">+</button></h2>
+
+    <h2>Random Thought <button type="button">+</button></h2>
+
+    <h2>Thought <button type="button">+</button></h2>
+
+    <h2>Answer <button type="button">+</button></h2>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<p class="message" id="error-message">{{ error_message }}</p>
+<p class="message" id="success-message">{{ success_message }}</p>
+{% endblock content %}
