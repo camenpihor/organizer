@@ -2,21 +2,21 @@
 
 {% block content %}
 {% load static %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/question.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'css/questions.css' %}" />
 <ul id="questions">
     {% for question in questions %}
         <li class="question" id="question_{{ question.id }}">
-            <div class="question_top" onclick="questionHandler('question_{{ question.id }}')">
-                <div class="question_date">{{ question.created_at_utc|date:"M j, Y" }}</div>
-                <div class="question_text">{{ question.question }}</div>
-                <div class="question_objects_count">Attached Objects: {{ question.count_attached_resources }}</div>
+            <div class="question-top" onclick="questionHandler('question_{{ question.id }}')">
+                <div class="question-date">{{ question.created_at_utc|date:"M j, Y" }}</div>
+                <div class="question-object question-text">{{ question.question }}</div>
+                <div class="question-object question-objects-count">Attached Objects: {{ question.count_attached_resources }}</div>
             </div>
-            <div class="question_bottom">
+            <div class="question-bottom">
                 <a href="{% url 'question' question_id=question.id%}">Go to Question</a>
-                <div class="question_object resources">Resources: {{ question.resource_set.count }}</div>
-                <div class="question_object answers">Answers: {{ question.answer_set.count }}</div>
-                <div class="question_object random">Random: {{ question.random_set.count }}</div>
-                <div class="question_object thoughts">Thoughts: {{ question.thought_set.count }}</div>
+                <div class="resources">Resources: {{ question.resource_set.count }}</div>
+                <div class="answers">Answers: {{ question.answer_set.count }}</div>
+                <div class="random">Random: {{ question.random_set.count }}</div>
+                <div class="thoughts">Thoughts: {{ question.thought_set.count }}</div>
             </div>
         </li>
     {% endfor %}

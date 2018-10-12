@@ -14,12 +14,12 @@ function questionHandler(question_id) {
 
 function expandQuestion(questionElement) {
     console.log("opening");
-    questionElement.querySelector(".question_bottom").style.display = "block";
+    questionElement.querySelector(".question-bottom").style.display = "block";
     questionElement.classList.add("opened");
 }
 
 function closeQuestion(questionElement) {
     console.log("closing");
-    questionElement.querySelector(".question_bottom").style.display = "none";
+    questionElement.querySelector(".question-bottom").style.display = "none";
     questionElement.classList.remove("opened");
 }
