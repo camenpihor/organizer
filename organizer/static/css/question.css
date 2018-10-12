@@ -13,8 +13,11 @@
     margin-left: 100px;
 }
 
-.question_resource_count {
+.question_objects_count {
     margin-left: 100px;
     font-size: 12px;
 }
 
+.question_bottom {
+    display: none;
+}

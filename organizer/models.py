@@ -6,15 +6,15 @@ class Question(models.Model):
     created_at_utc = models.DateTimeField(auto_now_add=True)
     question = models.TextField()
 
-    def get_resources(self):
-        return Resource.objects.filter(question=self)
+    def count_attached_resources(self):
+        return self.resource_set.count() + self.random_set.count() + self.thought_set.count() + self.answer_set.count()
 
     class Meta:
         db_table = "questions"
 
 
 class Resource(models.Model):
-    # one to many with Question
+    # one to many with Questionp;
     created_at_utc = models.DateTimeField(auto_now_add=True)
     resource_title = models.TextField()
     url = models.URLField(blank=True, null=True)
