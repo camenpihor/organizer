@@ -27,6 +27,6 @@ def create(request):
 
 
 def question(request, question_id):
-    get_object_or_404(Question, pk=question_id)
-    context = {'page_name': 'Question', 'question_id': question_id}
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'page_name': 'Question', 'question': question}
     return render(request, 'question.html', context)
