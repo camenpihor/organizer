@@ -16,7 +16,7 @@ class Question(models.Model):
 class Resource(models.Model):
     # one to many with Questionp;
     created_at_utc = models.DateTimeField(auto_now_add=True)
-    resource_title = models.TextField()
+    title = models.TextField()
     url = models.URLField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
     other = models.TextField(blank=True, null=True)
@@ -41,7 +41,7 @@ class Thought(models.Model):
     # one to many with Question
     created_at_utc = models.DateTimeField(auto_now_add=True)
     title = models.TextField()
-    thought = models.TextField()
+    text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     class Meta:
@@ -51,7 +51,7 @@ class Thought(models.Model):
 class Answer(models.Model):
     # one to many with Question
     created_at_utc = models.DateTimeField(auto_now_add=True)
-    answer = models.TextField()
+    text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     class Meta:

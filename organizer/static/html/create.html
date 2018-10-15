@@ -3,24 +3,84 @@
 {% block content %}
 {% load static %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/create.css' %}" />
-<form id="question-form" method="post" action={% url 'create' %}>
-    <h1>New Question</h1>
 
-    <h2>Question</h2>
-    <textarea name="question-text" id="question-text" placeholder="What is your question?" autofocus required></textarea>
+<form id="question-form" method="post" action={% url 'create' %}> {% csrf_token %}
+    <div id="question-form">
+        <h1>Question</h1>
+        {% for field in question_form %}
+            {{ field }}
+        {% endfor %}
+    </div>
 
-    <h2>Resource <button type="button">+</button></h2>
+    <div>
+        <h1>Resource <button type="button" onclick="addForm('resource')">+</button></h1>
+        {{ resource_formset.management_form }}
+        <div id="resource-formset">
+            {% for resource_form in resource_formset %}
+                {% for field in resource_form %}
+                    {{ field }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div id="empty-resource-form" style="display:none">
+            {% for field in resource_formset.empty_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
+    </div>
 
-    <h2>Random Thought <button type="button">+</button></h2>
+    <div>
+        <h1>Random <button type="button" onclick="addForm('random')">+</button></h1>
+        {{ random_formset.management_form }}
+        <div id="random-formset">
+            {% for random_form in random_formset %}
+                {% for field in random_form %}
+                    {{ field }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div id="empty-random-form" style="display:none">
+            {% for field in random_formset.empty_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
+    </div>
 
-    <h2>Thought <button type="button">+</button></h2>
+    <div>
+        <h1>Thought <button type="button" onclick="addForm('thought')">+</button></h1>
+        {{ thought_formset.management_form }}
+        <div id="thought-formset">
+            {% for thought_form in thought_formset %}
+                {% for field in thought_form %}
+                    {{ field }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div id="empty-thought-form" style="display:none">
+            {% for field in thought_formset.empty_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
+    </div>
 
-    <h2>Answer <button type="button">+</button></h2>
+    <div>
+        <h1>Answer <button type="button" onclick="addForm('answer')">+</button></h1>
+        {{ answer_formset.management_form }}
+        <div id="answer-formset">
+            {% for answer_form in answer_formset %}
+                {% for field in answer_form %}
+                    {{ field }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div id="empty-answer-form" style="display:none">
+            {% for field in answer_formset.empty_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
+    </div>
 
     <button type="submit">Submit</button>
-
 </form>
 
-<p class="message" id="error-message">{{ error_message }}</p>
-<p class="message" id="success-message">{{ success_message }}</p>
 {% endblock content %}

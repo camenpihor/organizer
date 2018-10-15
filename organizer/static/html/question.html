@@ -1,5 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-question {{ question.id }}
+<div>
+    <h1>Question</h1>
+    {{ question.question}}
+</div>
+<!-- Stats -->
+<div>
+    <h1>Resources</h1>
+    {% for resource in question.resource_set.all|dictsort:"created_at_utc" %}
+        <div>
+            <h3>{{ resource.title|capfirst }}</h3>
+        </div>
+        <div>
+            {% if resource.url %}
+                <a href="{{ resource.url }}" target="_blank">{{ resource.url }}</a>
+            {% elif resource.image %}
+                {{ resource.image }}
+            {% elif resource.other %}
+                {{ resource.other }}
+            {% endif %}
+        </div>
+        <div>
+            {{ resource.notes }}
+        </div>
+    {% endfor %}
+</div>
+<div>
+    <h1>Random Thoughts</h1>
+    <ul>
+        {% for random in question.random_set.all|dictsort:"created_at_utc" %}
+            <li>{{ random.text }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<!-- Thoughts -->
+<div>
+    <h1>Thoughts</h1>
+    {% for thought in question.thought_set.all|dictsort:"created_at_utc" %}
+        <div>
+            <h3>{{ thought.title|capfirst }}</h3>
+        </div>
+        <div>
+            {{ thought.text }}
+        </div>
+    {% endfor %}
+</div>
+<div>
+    <h1>Answers</h1>
+    {% for answer in question.answer_set.all|dictsort:"created_at_utc" %}
+        <div>
+            {{ answer.text }}
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock content %}

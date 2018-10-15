@@ -23,3 +23,17 @@ function closeQuestion(questionElement) {
     questionElement.querySelector(".question-bottom").style.display = "none";
     questionElement.classList.remove("opened");
 }
+
+function addForm(formType) {
+    console.log("adding form")
+    console.log(formType)
+    var totalFormElement = document.getElementById("id_" + formType + "-TOTAL_FORMS")
+    console.log(totalFormElement)
+    var formSetElement = document.getElementById(formType + "-formset")
+    var emptyFormElement = document.getElementById("empty-" + formType + "-form")
+    var initialNumForms = parseInt(totalFormElement.value)
+
+    formSetElement.innerHTML += "<h2> " + (initialNumForms + 1) + "</h2>"
+    formSetElement.innerHTML += emptyFormElement.innerHTML.replace(/__prefix__/g, initialNumForms)
+    totalFormElement.value = initialNumForms + 1
+}
