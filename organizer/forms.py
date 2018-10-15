@@ -8,7 +8,10 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['text']
         widgets = {
-            'text': forms.Textarea(attrs={'placeholder': 'What is your question?', 'autofocus': 'autofocus'})
+            'text': forms.Textarea(attrs={
+                'placeholder': 'What is your question?',
+                'autofocus': 'autofocus'
+            })
         }
 
 
