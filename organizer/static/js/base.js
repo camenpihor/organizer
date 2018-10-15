@@ -33,7 +33,7 @@ function addForm(formType) {
     var emptyFormElement = document.getElementById("empty-" + formType + "-form")
     var initialNumForms = parseInt(totalFormElement.value)
 
-    formSetElement.innerHTML += "<h2> " + (initialNumForms + 1) + "</h2>"
-    formSetElement.innerHTML += emptyFormElement.innerHTML.replace(/__prefix__/g, initialNumForms)
+    formSetElement.insertAdjacentHTML('beforeend', "<h2> " + (initialNumForms + 1) + "</h2>")
+    formSetElement.insertAdjacentHTML('beforeend', emptyFormElement.innerHTML.replace(/__prefix__/g, initialNumForms))
     totalFormElement.value = initialNumForms + 1
 }
