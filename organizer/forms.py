@@ -6,9 +6,9 @@ from organizer.models import Question, Resource, Random, Thought, Answer
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['question']
+        fields = ['text']
         widgets = {
-            'question': forms.Textarea(attrs={'placeholder': 'What is your question?'})
+            'text': forms.Textarea(attrs={'placeholder': 'What is your question?'})
         }
 
 

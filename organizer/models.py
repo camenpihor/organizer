@@ -4,7 +4,7 @@ from django.db import models
 class Question(models.Model):
     # Base
     created_at_utc = models.DateTimeField(auto_now_add=True)
-    question = models.TextField()
+    text = models.TextField()
 
     def count_attached_resources(self):
         return self.resource_set.count() + self.random_set.count() + self.thought_set.count() + self.answer_set.count()
