@@ -18,3 +18,5 @@ To organize my questioning and answering
 - pick a text editor to use in `<textarea>`
 - finish css
 - close site
+- hide removeForm button in /create
+- don't persist removed/deleted forms 
