@@ -23,6 +23,11 @@ class Resource(models.Model):
     notes = models.TextField(blank=True, null=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        if self.title and (self.url or self.image or self.other):
+            super().save(*args, **kwargs)
+        return None
+
     class Meta:
         db_table = "resources"
 
@@ -32,6 +37,11 @@ class Random(models.Model):
     created_at_utc = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if self.text:
+            super().save(*args, **kwargs)
+        return False
 
     class Meta:
         db_table = "random_thoughts"
@@ -44,6 +54,11 @@ class Thought(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        if self.title:
+            super().save(*args, **kwargs)
+        return False
+
     class Meta:
         db_table = "thoughts"
 
@@ -53,6 +68,11 @@ class Answer(models.Model):
     created_at_utc = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if self.text:
+            super().save(*args, **kwargs)
+        return False
 
     class Meta:
         db_table = "answers"

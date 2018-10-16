@@ -9,7 +9,6 @@ function questionHandler(question_id) {
     else {
         closeQuestion(questionElement);
     }
-
 }
 
 function expandQuestion(questionElement) {
@@ -39,12 +38,7 @@ function addForm(formType) {
     removeButton.name = formType + "-" + initialNumForms;
     removeButton.onclick = function() {removeForm(formType, initialNumForms + 1)};
 
-    var formHeader = document.createElement("h2");
-    var formHeaderText = document.createTextNode((initialNumForms + 1) + " ");
-    formHeader.appendChild(formHeaderText);
-    formHeader.appendChild(removeButton);
-
-    formSetElement.insertAdjacentElement('beforeend', formHeader);
+    formSetElement.insertAdjacentElement('beforeend', removeButton);
     formSetElement.insertAdjacentHTML('beforeend', emptyFormElement.innerHTML.replace(/__prefix__/g, initialNumForms));
     totalFormElement.value = initialNumForms + 1;
 }
@@ -61,6 +55,7 @@ function removeForm(formType, formIdx) {
         if (formSetChildren[i].hasAttribute("name")) {
             if (formSetChildren[i].name.includes(searchString)) {
                 formSetChildren[i].style.display = "none";
+                formSetChildren[i].value = "";
             }
         }
     }

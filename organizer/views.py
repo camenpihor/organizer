@@ -8,7 +8,9 @@ from organizer import forms
 
 def home(request):
     context = {'page_name': 'Home'}
-    context['questions'] = np.random.choice(models.Question.objects.all(), size=5, replace=False)
+    all_questions = models.Question.objects.all()
+    if all_questions:
+        context['questions'] = np.random.choice(all_questions, size=5, replace=False)
     return render(request, 'home.html', context)
 
 
@@ -37,34 +39,32 @@ def create(request):
         thought_formset = ThoughtFormSet(request.POST, prefix='thought')
         answer_formset = AnswerFormSet(request.POST, prefix='answer')
 
-        if question_form.is_valid():
+        if question_form.is_valid() and resource_formset.is_valid() and random_formset.is_valid() and \
+                thought_formset.is_valid() and answer_formset.is_valid():
+
             question = question_form.save()
 
-        if resource_formset.is_valid():
             for resource_form in resource_formset:
                 resource = resource_form.save(commit=False)
                 resource.question = question
                 resource.save()
 
-        if random_formset.is_valid():
             for random_form in random_formset:
                 random = random_form.save(commit=False)
                 random.question = question
                 random.save()
 
-        if thought_formset.is_valid():
             for thought_form in thought_formset:
                 thought = thought_form.save(commit=False)
                 thought.question = question
                 thought.save()
 
-        if answer_formset.is_valid():
             for answer_form in answer_formset:
                 answer = answer_form.save(commit=False)
                 answer.question = question
                 answer.save()
 
-        return redirect('question', question_id=question.id)
+            return redirect('question', question_id=question.id)
 
     else:
         question_form = forms.QuestionForm()
