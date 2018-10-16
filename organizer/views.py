@@ -10,7 +10,8 @@ def home(request):
     context = {'page_name': 'Home'}
     all_questions = models.Question.objects.all()
     if all_questions:
-        context['questions'] = np.random.choice(all_questions, size=5, replace=False)
+        num_to_take = np.min([len(all_questions), 5])
+        context['questions'] = np.random.choice(all_questions, size=num_to_take, replace=False)
     return render(request, 'home.html', context)
 
 
