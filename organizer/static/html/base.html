@@ -9,8 +9,18 @@
 </head>
 
 <body>
-    <div>
-        - \ - Organizer - / -
+    <!-- Top Navigation Bar -->
+    <div id="top-nav">
+        <ul id="top-nav-left">
+            <li class="top-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="top-item"><a href="{% url 'questions' %}">Questions</a></li>
+            <li class="top-item"><a href="{% url 'create' %}">Create</a></li>
+            <li class="top-item"><a href="{% url 'stats' %}">Stats</a></li>
+        </ul>
+
+        <ul id="top-nav-right">
+            <li class="top-item" id="search-bar"><input type="text" placeholder="Search"></li>
+        </ul>
     </div>
 
     <!-- Content -->

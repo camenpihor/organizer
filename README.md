@@ -14,3 +14,4 @@ To organize my questioning and answering
 - pick a text editor to use in `<textarea>`
 - finish css
 - close site
+- editing a saved object and persisting a last_updated at stamp
