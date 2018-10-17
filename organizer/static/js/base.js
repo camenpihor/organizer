@@ -29,35 +29,38 @@ function addForm(formType) {
     var totalFormElement = document.getElementById("id_" + formType + "-TOTAL_FORMS");
     console.log(totalFormElement);
     var formSetElement = document.getElementById(formType + "-formset");
-    var emptyFormElement = document.getElementById("empty-" + formType + "-form");
+    var formElement = document.getElementById("empty-" + formType + "-form").cloneNode(true);
     var initialNumForms = parseInt(totalFormElement.value);
 
-    var removeButton = document.createElement("input");
+    var removeButton = document.createElement("button");
     removeButton.type = "button";
-    removeButton.value = "X";
-    removeButton.name = formType + "-" + initialNumForms;
+    removeButton.className = "remove-form-button"
+    removeButton.id = formType + "-" + initialNumForms + "-remove-button";
     removeButton.onclick = function() {removeForm(formType, initialNumForms + 1)};
+    var buttonText = document.createTextNode("X");
+    removeButton.appendChild(buttonText);
+
+    formElement.id = formType + "-" + initialNumForms + "-form"
+    formElement.style.display = "grid"
 
     formSetElement.insertAdjacentElement('beforeend', removeButton);
-    formSetElement.insertAdjacentHTML('beforeend', emptyFormElement.innerHTML.replace(/__prefix__/g, initialNumForms));
+    formSetElement.insertAdjacentHTML('beforeend', formElement.outerHTML.replace(/__prefix__/g, initialNumForms));
     totalFormElement.value = initialNumForms + 1;
 }
 
 function removeForm(formType, formIdx) {
     console.log("removing form");
-    console.log(formType + " " + formIdx);
     var formSetElement = document.getElementById(formType + "-formset");
     var formSetChildren = formSetElement.children
     var searchString = formType + "-" + (parseInt(formIdx) - 1)
     console.log(searchString)
 
     for (var i = 0; i < formSetChildren.length; i++) {
-        if (formSetChildren[i].hasAttribute("name")) {
-            if (formSetChildren[i].name.includes(searchString)) {
+        if (formSetChildren[i].hasAttribute("id")) {
+            if (formSetChildren[i].id.includes(searchString)) {
                 formSetChildren[i].style.display = "none";
                 formSetChildren[i].value = "";
             }
         }
     }
-    document.getElementById("id_" + formType + "-" + (parseInt(formIdx) - 1) + "-DELETE").value = "on"
 }

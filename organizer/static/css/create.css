@@ -1,5 +1,43 @@
 #question-text {
-    width: 300px;
-    height: 150px;
-    resize: none
+  width: 300px;
+  height: 150px;
+  resize: none
 }
+
+.formset {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.card {
+  flex: 0 0 auto;
+  margin: 0em 3em 3em 1em;
+  border: 1px solid lightgray;
+  padding: 0.5em 1em 1em 1em;
+}
+
+.form-item {
+  padding: 1em;
+}
+
+.remove-form-button {
+  height: 10%;
+  padding: 1em 1em 1em 1em;
+  font-size: 15px;
+}
+
+.add-form-button {
+  font-size: 34px;
+  font-weight: 100;
+}
+
+.form-textarea {
+  margin-bottom: 2em;
+}
+
+.form-button {
+  box-shadow: none;
+  cursor: pointer;
+}
+

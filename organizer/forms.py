@@ -10,7 +10,8 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={
                 'placeholder': 'What is your question?',
-                'autofocus': 'autofocus'
+                'autofocus': 'autofocus',
+                'class': 'form-textarea'
             })
         }
 
@@ -20,11 +21,11 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ['title', 'url', 'image', 'other', 'notes']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Title'}),
-            'url': forms.URLInput(attrs={'placeholder': 'URL'}),
-            'image': forms.FileInput(attrs={'accept': 'image/*'}),
-            'other': forms.Textarea(attrs={'placeholder': 'Other'}),
-            'notes': forms.Textarea(attrs={'placeholder': 'Notes'})
+            'title': forms.TextInput(attrs={'placeholder': 'Title', 'class': 'form-input form-item'}),
+            'url': forms.URLInput(attrs={'placeholder': 'URL', 'class': 'form-input form-item'}),
+            'image': forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-button form-item'}),
+            'other': forms.Textarea(attrs={'placeholder': 'Other', 'class': 'form-textarea form-item'}),
+            'notes': forms.Textarea(attrs={'placeholder': 'Notes', 'class': 'form-textarea form-item'})
         }
 
 

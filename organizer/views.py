@@ -28,10 +28,10 @@ def stats(request):
 
 def create(request):
     context = {'page_name': 'Create'}
-    ResourceFormSet = formset_factory(forms.ResourceForm, extra=0, min_num=0, can_delete=True)
-    RandomFormSet = formset_factory(forms.RandomForm, extra=0, min_num=0, can_delete=True)
-    ThoughtFormSet = formset_factory(forms.ThoughtForm, extra=0, min_num=0, can_delete=True)
-    AnswerFormSet = formset_factory(forms.AnswerForm, extra=0, min_num=0, can_delete=True)
+    ResourceFormSet = formset_factory(forms.ResourceForm, extra=0, min_num=0)
+    RandomFormSet = formset_factory(forms.RandomForm, extra=0, min_num=0)
+    ThoughtFormSet = formset_factory(forms.ThoughtForm, extra=0, min_num=0)
+    AnswerFormSet = formset_factory(forms.AnswerForm, extra=0, min_num=0)
 
     if request.method == 'POST':
         question_form = forms.QuestionForm(request.POST)
