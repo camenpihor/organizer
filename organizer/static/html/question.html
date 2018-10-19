@@ -1,58 +1,72 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<div>
-    <h1>Question</h1>
-    {{ question.text}}
-</div>
-<!-- Stats -->
-<div>
-    <h1>Resources</h1>
-    {% for resource in question.resource_set.all|dictsort:"created_at_utc" %}
-        <div>
-            <h3>{{ resource.title|capfirst }}</h3>
-        </div>
-        <div>
-            {% if resource.url %}
-                <a href="{{ resource.url }}" target="_blank">{{ resource.url }}</a>
-            {% elif resource.image %}
-                {{ resource.image }}
-            {% elif resource.other %}
-                {{ resource.other }}
-            {% endif %}
-        </div>
-        <div>
-            {{ resource.notes }}
-        </div>
-    {% endfor %}
-</div>
-<div>
-    <h1>Random Thoughts</h1>
-    <ul>
-        {% for random in question.random_set.all|dictsort:"created_at_utc" %}
-            <li>{{ random.text }}</li>
-        {% endfor %}
-    </ul>
-</div>
-<!-- Thoughts -->
-<div>
-    <h1>Thoughts</h1>
-    {% for thought in question.thought_set.all|dictsort:"created_at_utc" %}
-        <div>
-            <h3>{{ thought.title|capfirst }}</h3>
-        </div>
-        <div>
-            {{ thought.text }}
-        </div>
-    {% endfor %}
-</div>
-<div>
-    <h1>Answers</h1>
-    {% for answer in question.answer_set.all|dictsort:"created_at_utc" %}
-        <div>
-            {{ answer.text }}
-        </div>
-    {% endfor %}
-</div>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/question.css' %}">
 
+  <!-- Question Header -->
+  <h1 id="question-header">" {{ question.text|capfirst }} "</h1>
+
+  <!-- Linked Objects -->
+  <div id="linked-objects-lists">
+    <div class="object-list-container" id="topics-list">
+      <h2 class="object-title">Topics</h2>
+      <ul class="object-list">
+        <li class="topic">One</li>
+        <li class="topic">Two</li>
+        <li class="topic">Three</li>
+      </ul>
+    </div>
+    <div class="object-list-container" id="books-list">
+      <h2 class="object-title">Books</h2>
+      <ul class="object-list">
+        <li class="book">One</li>
+        <li class="book">Two</li>
+        <li class="book">Three</li>
+      </ul>
+    </div>
+    <div class="object-list-container" id="facts-list">
+      <h2 class="object-title">Facts</h2>
+      <ul class="object-list">
+        <li class="fact">One</li>
+        <li class="fact">Two</li>
+        <li class="fact">Three</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Text Input -->
+  <button type="button" id="text-editor-button" class="open" onclick="handleTextEditorButton(this)">-</button>
+  <form id="text-editor">
+    <select name="object-type" id="resource-picker-button">
+      <option value="resource">Resource</option>
+      <option value="musing">Thought</option>
+      <option value="answer">Answer</option>
+    </select>
+    <textarea placeholder="Add new resource, thought, or answer here..." required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- History -->
+  <div id="history">
+    <select type="button" id="history-order-button">
+        <option value="Date">Date</option>
+        <option value="Type">Type</option>
+        <option value="Ranking">Ranking</option>
+      </select>
+    </select>
+    <ul id="history-list">
+      {% for obj in question.get_all_connected_objects %}
+        <li class="history-item">
+          <div>{{ obj.created_at_utc|date:"M j, Y g:i a" }}</div>
+          <div>{{ obj.get_class_name|capfirst }}</div>
+          {% if obj.get_class_name == "resource" %}
+            <div>{{ obj.title|slice:":300" }}...</div>
+          {% else %}
+            <div>{{ obj.text|slice:":300" }}...</div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock content %}

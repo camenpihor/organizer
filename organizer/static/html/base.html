@@ -1,35 +1,61 @@
 <!DOCTYPE html>
-{% load static %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" />
 
 <html>
-
 <head>
-    <title> Organizer | {{ page_name }} </title>
+    {% load static %}
+
+    <title> Organizer | {{ page_type }} </title>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 </head>
 
 <body>
-    <!-- Top Navigation Bar -->
-    <div id="top-nav">
-        <ul id="top-nav-left">
-            <li class="top-item"><a href="{% url 'home' %}">Home</a></li>
-            <li class="top-item"><a href="{% url 'questions' %}">Questions</a></li>
-            <li class="top-item"><a href="{% url 'create' %}">Create</a></li>
-            <li class="top-item"><a href="{% url 'stats' %}">Stats</a></li>
-        </ul>
-
-        <ul id="top-nav-right">
-            <li class="top-item"><input id="search-bar" type="text" placeholder="Search"></li>
-        </ul>
+  <!-- Navigation Bar -->
+  <div id="top-nav">
+    <div id="top-nav-top">
+      <h1 id="page_type">{{ page_type }}</h1>
     </div>
-
-    <!-- Content -->
-    <div id="content">
-        {% block content %}{% endblock content %}
+    <div id="top-nav-bottom">
+      <ul id=nav-items>
+        <li class="nav-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a>Archive</a></li>
+        <li class="nav-item"><a>Create</a></li>
+        <li class="nav-item"><a>Stats</a></li>
+      </ul>
     </div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="{% static 'js/base.js' %}"></script>
+  <!-- Content -->
+  <div id="content">
+    {% block content %}{% endblock content %}
+  </div>
+
+  <!-- Status Bar -->
+  {% if status_bar %}
+    <div id="status-bar">
+      <ul id="status-list">
+        <li class="status-item">Text</li>
+        <li class="status-item"><span class="status-count" id="num_words">0</span> words</li>
+        <li class="status-item"><span class="status-count" id="num_characters">0</span> characters</li>
+        <li class="status-item"><span class="status-count" id="num_lines">0</span> lines</li>
+        <li class="status-item"><span class="status-count" id="num_paragraphs">0</span> paragraphs</li>
+      </ul>
+    </div>
+  {% endif %}
+
+  <!-- Scripts -->
+  <script src="{% static 'js/base.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script>var simplemde = new SimpleMDE({
+    tabSize: 4,
+    toolbarTips: false,
+    hideIcons: ["guide"],
+    showIcons: ["table", "horizontal-rule", "strikethrough"],
+    status: [{onUpdate: function() {
+                countChar(simplemde);
+              }}],
+    forceSync: true
+  });</script>
 </body>
 
-</html>
+ </html>

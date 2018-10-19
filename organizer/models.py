@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.db import models
 
 
@@ -8,6 +10,15 @@ class Question(models.Model):
 
     def count_attached_resources(self):
         return self.resource_set.count() + self.random_set.count() + self.thought_set.count() + self.answer_set.count()
+
+    def get_all_connected_objects(self):
+        return sorted(
+            chain(self.resource_set.all(),
+                  self.random_set.all(),
+                  self.thought_set.all(),
+                  self.answer_set.all()),
+            key=lambda obj: obj.created_at_utc
+        )
 
     class Meta:
         db_table = "questions"
@@ -28,6 +39,10 @@ class Resource(models.Model):
             super().save(*args, **kwargs)
         return None
 
+    @staticmethod
+    def get_class_name():
+        return "resource"
+
     class Meta:
         db_table = "resources"
 
@@ -42,6 +57,10 @@ class Random(models.Model):
         if self.text:
             super().save(*args, **kwargs)
         return False
+
+    @staticmethod
+    def get_class_name():
+        return "random"
 
     class Meta:
         db_table = "random_thoughts"
@@ -59,6 +78,10 @@ class Thought(models.Model):
             super().save(*args, **kwargs)
         return False
 
+    @staticmethod
+    def get_class_name():
+        return "thought"
+
     class Meta:
         db_table = "thoughts"
 
@@ -73,6 +96,10 @@ class Answer(models.Model):
         if self.text:
             super().save(*args, **kwargs)
         return False
+
+    @staticmethod
+    def get_class_name():
+        return "answer"
 
     class Meta:
         db_table = "answers"

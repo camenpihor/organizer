@@ -1,0 +1,30 @@
+#question-header {
+  text-align: center;
+}
+
+#linked-objects-lists {
+  display: flex;
+  text-align: center;
+}
+
+.object-list-container {
+  flex: 33%;
+}
+
+.object-list {
+  list-style: none;
+  padding: 0;
+}
+
+#history {
+  margin: 3em 0 7em 0;
+}
+
+#history-list {
+  margin: 0;
+  list-style: none;
+}
+
+.history-item {
+  margin: 1em;
+}
