@@ -5,28 +5,40 @@
     {% load static %}
 
     <title> Organizer | {{ page_type }} </title>
-    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 
-<body>
-  <!-- Navigation Bar -->
+<body class="normal-background">
+  <!-- Top Navigation Bar -->
   <div id="top-nav">
     <div id="top-nav-top">
-      <h1 id="page_type">{{ page_type }}</h1>
+      <h1 id="page-type">{{ page_type }}</h1>
     </div>
     <div id="top-nav-bottom">
-      <ul id=nav-items>
-        <li class="nav-item"><a href="{% url 'home' %}">Home</a></li>
-        <li class="nav-item"><a>Archive</a></li>
-        <li class="nav-item"><a>Create</a></li>
-        <li class="nav-item"><a>Stats</a></li>
+      <ul id=top-nav-items>
+        <li class="top-nav-item" id="side-nav-toggle" onclick="expandSideNav()">></li>
+        <li class="top-nav-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="top-nav-item"><a>Archive</a></li>
+        <li class="top-nav-item"><a>Create</a></li>
+        <li class="top-nav-item"><a>Stats</a></li>
       </ul>
     </div>
   </div>
 
+  <!-- Side Navigation Bar -->
+  <div id="side-nav">
+    <button type="button" id="side-nav-close-button" onclick="closeSideNav()">X</button>
+    <ul id="side-nav-items">
+      <li class="side-nav-item">Questions</li>
+      <li class="side-nav-item">Topics</li>
+      <li class="side-nav-item">Books</li>
+      <li class="side-nav-item">Facts</li>
+    </ul>
+  </div>
+
   <!-- Content -->
-  <div id="content">
+  <div id="content" class="normal-background">
     {% block content %}{% endblock content %}
   </div>
 

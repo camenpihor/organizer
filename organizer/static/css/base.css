@@ -1,6 +1,7 @@
 html, body {
   margin: 0px;
   padding: 0px;
+  transition: 0.5s;
 }
 
 a {
@@ -22,28 +23,28 @@ a {
   height: 50%;
 }
 
-#page_type {
+#page-type {
   margin: 0 0 0 2em;
 }
 
-#nav-items {
+#top-nav-items {
   list-style: none;
   display: inline-flex;
   margin: 0 0 0 4em;
 }
 
-.nav-item {
+.top-nav-item {
   padding: 0.5em 1em 0.4em 1em;
   border-right: 1px solid black;
   margin-top: 0.4em;
   cursor: pointer;
 }
 
-.nav-item a {
+.top-nav-item a {
   text-decoration: none;
 }
 
-.nav-item:hover {
+.top-nav-item:hover {
   background: rgba(89, 89, 89, 0.303);
   color: white;
 }
@@ -71,4 +72,37 @@ a {
 
 .status-count {
   font-weight: bold;
+}
+
+#side-nav {
+  position: fixed;
+  height: 100%;
+  width: 30%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  transform: translate(-70vw, 0px);
+  overflow-x: hidden;
+  transition: 0.5s;
+  font-size: 3em;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
+}
+
+#side-nav-items {
+  list-style: none;
+}
+
+.side-nav-item {
+  display: block;
+  padding: 0.2em 0;
+  cursor: pointer;
+}
+
+.side-nav-item:hover {
+  background: rgba(89, 89, 89, 0.303);
+}
+
+#side-nav-close-button {
+  float: right;
 }

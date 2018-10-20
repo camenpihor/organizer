@@ -5,8 +5,6 @@ To organize my questioning, answering, musing, and listing
 # To Do
 
 ## Questions
-- base
-    - add side nav to switch between questions, books, fun facts, and topics
 - /question/id
     - css on buttons
     - click to expand history items

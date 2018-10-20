@@ -37,13 +37,13 @@
 
   <!-- Text Input -->
   <button type="button" id="text-editor-button" class="open" onclick="handleTextEditorButton(this)">-</button>
-  <form id="text-editor">
+  <form id="text-editor-form">
     <select name="object-type" id="resource-picker-button">
       <option value="resource">Resource</option>
       <option value="musing">Thought</option>
       <option value="answer">Answer</option>
     </select>
-    <textarea placeholder="Add new resource, thought, or answer here..." required></textarea>
+    <textarea id="text-editor" placeholder="Add new resource, thought, or answer here..." required></textarea>
     <button type="submit">Submit</button>
   </form>
 
