@@ -5,9 +5,9 @@ To organize my questioning, answering, musing, and listing
 # To Do
 
 ## Questions
+- unit tests
+- clean up base.css
 - /question/id
-    - css on buttons
-    - click to expand history items
     - can save new resources, musings, and answers
     - can edit old history items in main editor
     - add necessary fields to model
@@ -17,6 +17,7 @@ To organize my questioning, answering, musing, and listing
 - /home
 - /create
 - /stats
+- clean up css
 
 ## Books
 - base

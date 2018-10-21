@@ -1,18 +1,3 @@
-function handleTextEditorButton(buttonElement) {
-  var buttonClass = buttonElement.className;
-  if (buttonClass == "closed") {
-    console.log("opening text editor");
-    buttonElement.innerText = "-";
-    document.getElementById("text-editor-form").style.display = "block";
-    buttonElement.className = "open";
-  } else {
-    console.log("closing text editor");
-    buttonElement.innerText = "+";
-    document.getElementById("text-editor-form").style.display = "none";
-    buttonElement.className = "closed";
-  }
-}
-
 function countChar(simplemde) {
   document.getElementById("num_characters").innerText = simplemde.value().length;
   document.getElementById("num_words").innerText = simplemde.value().split(' ').length - 1;
@@ -28,4 +13,44 @@ function expandSideNav() {
 function closeSideNav() {
   console.log("closing side navigation");
   document.getElementById("side-nav").style.transform = "translate(-70vw, 0)";
+}
+
+function expandHistoryItem(element) {
+  if (event.target.tagName != "A") {
+    console.log("expanding/collapsing history item");
+    var elementChildren = element.children;
+    for (var i = 0; i < elementChildren.length; i++) {
+      if (elementChildren[i].classList.contains("expanded-history-item")) {
+        elementChildren[i].classList.toggle("open");
+      }
+    }
+  }
+  else {
+    console.log("not closing history item since 'A' tag was selected")
+  }
+}
+
+function expandAllHistory() {
+  var target = event.target;
+  var historyListChildren = document.getElementById("history-list").getElementsByTagName('*');
+
+  if (target.innerText == "Expand All") {
+    console.log("expaning all history")
+    for (var i = 0; i < historyListChildren.length; i++) {
+      if (historyListChildren[i].classList.contains("expanded-history-item")) {
+        historyListChildren[i].classList.add("open");
+      }
+    }
+    target.innerText = "Collapse All";
+  }
+
+  else {
+    console.log("collapsing all history");
+    for (var i = 0; i < historyListChildren.length; i++) {
+      if (historyListChildren[i].classList.contains("expanded-history-item")) {
+        historyListChildren[i].classList.remove("open");
+      }
+    }
+    target.innerText = "Expand All";
+  }
 }

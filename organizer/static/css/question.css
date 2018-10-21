@@ -22,9 +22,26 @@
 
 #history-list {
   margin: 0;
+  padding: 0;
   list-style: none;
 }
 
 .history-item {
-  margin: 1em;
+  padding: 0.5em 0 0.5em 3em;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.history-item:hover {
+  background-color: rgba(0,0,0,.1);
+}
+
+.expanded-history-item {
+  display: none;
+}
+
+.expanded-history-item.open {
+  display: block;
+  padding-bottom: 1em;
+  border-bottom: 0.5px solid lightgray;
 }

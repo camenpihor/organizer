@@ -36,8 +36,7 @@
   </div>
 
   <!-- Text Input -->
-  <button type="button" id="text-editor-button" class="open" onclick="handleTextEditorButton(this)">-</button>
-  <form id="text-editor-form">
+  <form  id="text-editor-form">
     <select name="object-type" id="resource-picker-button">
       <option value="resource">Resource</option>
       <option value="musing">Thought</option>
@@ -49,21 +48,42 @@
 
   <!-- History -->
   <div id="history">
-    <select type="button" id="history-order-button">
+    <button type="button" id="history-expand-all" onclick="expandAllHistory()">Expand All</button>
+    <select id="history-order-button">
         <option value="Date">Date</option>
         <option value="Type">Type</option>
         <option value="Ranking">Ranking</option>
-      </select>
     </select>
     <ul id="history-list">
       {% for obj in question.get_all_connected_objects %}
-        <li class="history-item">
+        <li class="history-item" onclick="expandHistoryItem(this)">
           <div>{{ obj.created_at_utc|date:"M j, Y g:i a" }}</div>
           <div>{{ obj.get_class_name|capfirst }}</div>
+
           {% if obj.get_class_name == "resource" %}
             <div>{{ obj.title|slice:":300" }}...</div>
-          {% else %}
+            <div class="expanded-history-item">
+              <a href="{{ obj.url }}" target="_blank">{{ obj.url }}</a>
+              <div>{{ obj.image }}</div>
+              <div>{{ obj.other }}</div>
+              <div>{{ obj.notes }}</div>
+            </div>
+
+          {% elif obj.get_class_name == "random" %}
+            <div>{{ obj.text |slice:":300" }}...</div>
+            <div class="expanded-history-item">
+              <div>{{ obj.text }}</div>
+            </div>
+
+          {% elif obj.get_class_name == "thought" %}
             <div>{{ obj.text|slice:":300" }}...</div>
+            <div class="expanded-history-item">
+              <div>{{ obj.text }}</div>
+
+          {% elif obj.get_class_name == "answer" %}
+            <div>{{ obj.text|slice:":300" }}...</div>
+            <div class="expanded-history-item">
+              <div>{{ obj.text }}</div>
           {% endif %}
         </li>
       {% endfor %}
