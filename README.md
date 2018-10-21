@@ -5,14 +5,13 @@ To organize my questioning, answering, musing, and listing
 # To Do
 
 ## Questions
-- unit tests
-- clean up base.css
 - /question/id
     - can save new resources, musings, and answers
     - can edit old history items in main editor
     - add necessary fields to model
     - make history sortable by type and ranking
     - add question creation date
+- unit tests
 - /archive
 - /home
 - /create
