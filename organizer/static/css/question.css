@@ -16,6 +16,10 @@
   padding: 0;
 }
 
+#history-expand-all {
+  margin-bottom: 1em;
+}
+
 #history {
   margin: 3em 0 7em 0;
 }
@@ -27,12 +31,37 @@
 }
 
 .history-item {
-  padding: 0.5em 0 0.5em 3em;
   cursor: pointer;
-  margin-bottom: 1em;
+  border-bottom: 0.5px solid lightgray;
+  width: 100%;
+  display: inline-flex;
 }
 
 .history-item:hover {
+  background-color: rgba(0,0,0,.1);
+}
+
+.history-item:hover .history-buttons {
+  display: block;
+}
+
+.history-information {
+  padding: 1em 0 0.5em 3em;
+  width: 70%;
+}
+
+.history-buttons {
+  display: none;
+  width: 30%;
+}
+
+.history-button {
+  width: 49%;
+  height: 100%;
+  background: inherit;
+}
+
+.history-button:hover {
   background-color: rgba(0,0,0,.1);
 }
 
@@ -43,5 +72,8 @@
 .expanded-history-item.open {
   display: block;
   padding-bottom: 1em;
-  border-bottom: 0.5px solid lightgray;
+}
+
+#error-message {
+  color: red;
 }

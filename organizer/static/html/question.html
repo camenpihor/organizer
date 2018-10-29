@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+{% load template_tags %}
 
 {% block content %}
   <link type="text/css" rel="stylesheet" href="{% static 'css/question.css' %}">
 
   <!-- Question Header -->
-  <h1 id="question-header">" {{ question.text|capfirst }} "</h1>
+  <h1 id="question-header">" {{ question.question|capfirst }} "</h1>
 
   <!-- Linked Objects -->
   <div id="linked-objects-lists">
@@ -35,14 +36,17 @@
     </div>
   </div>
 
-  <!-- Text Input -->
-  <form  id="text-editor-form">
-    <select name="object-type" id="resource-picker-button">
-      <option value="resource">Resource</option>
-      <option value="musing">Thought</option>
-      <option value="answer">Answer</option>
+  <!-- Text Input Form -->
+  <form id="text-editor-form" method="post" action="{% url 'question' question_id=question.id%}"> {% csrf_token %}
+    <select name="form-type" id="obj-picker-button" onchange="outlineQuestionObject(this.value)">
+      <option value="none">Choose Form Type</option>
+      <option value="resource" {% if form_type == "resource" %} selected {% endif %}>Resource</option>
+      <option value="thought" {% if form_type == "thought" %} selected {% endif %}>Thought</option>
+      <option value="answer" {% if form_type == "answer" %} selected {% endif %}>Answer</option>
     </select>
-    <textarea id="text-editor" placeholder="Add new resource, thought, or answer here..." required></textarea>
+    <div id="error-message">{{ error_message }}</div>
+    <textarea name="text-input" id="text-editor" placeholder="Create or edit resources, thoughts, or answers here..." required>{{ form_text }}</textarea>
+    <input type="hidden" name="edit-object-id" id="edit-object-id">
     <button type="submit">Submit</button>
   </form>
 
@@ -56,37 +60,33 @@
     </select>
     <ul id="history-list">
       {% for obj in question.get_all_connected_objects %}
-        <li class="history-item" onclick="expandHistoryItem(this)">
-          <div>{{ obj.created_at_utc|date:"M j, Y g:i a" }}</div>
-          <div>{{ obj.get_class_name|capfirst }}</div>
+        <li class="history-item">
+          <div class="history-information">
+            <div>{{ obj.created_at_utc|date:"M j, Y g:i a" }}</div>
+            <div>{{ obj.get_class_name|capfirst }}</div>
+            {% autoescape off %}
+            <div>{{ obj.summary|markdown_to_html }}</div>
+            <div class="expanded-history-item" id="expanded-history-item-{{ obj.get_class_name }}-{{ obj.id }}">
+              {% if obj.get_class_name == "resource" %}
+                {{ obj.resource|markdown_to_html }}
+                {{ obj.notes|markdown_to_html }}
 
-          {% if obj.get_class_name == "resource" %}
-            <div>{{ obj.title|slice:":300" }}...</div>
-            <div class="expanded-history-item">
-              <a href="{{ obj.url }}" target="_blank">{{ obj.url }}</a>
-              <div>{{ obj.image }}</div>
-              <div>{{ obj.other }}</div>
-              <div>{{ obj.notes }}</div>
+              {% elif obj.get_class_name == "thought" %}
+                {{ obj.thought|markdown_to_html }}
+
+              {% elif obj.get_class_name == "answer" %}
+                {{ obj.answer|markdown_to_html }}
+              {% endif %}
             </div>
-
-          {% elif obj.get_class_name == "random" %}
-            <div>{{ obj.text |slice:":300" }}...</div>
-            <div class="expanded-history-item">
-              <div>{{ obj.text }}</div>
-            </div>
-
-          {% elif obj.get_class_name == "thought" %}
-            <div>{{ obj.text|slice:":300" }}...</div>
-            <div class="expanded-history-item">
-              <div>{{ obj.text }}</div>
-
-          {% elif obj.get_class_name == "answer" %}
-            <div>{{ obj.text|slice:":300" }}...</div>
-            <div class="expanded-history-item">
-              <div>{{ obj.text }}</div>
-          {% endif %}
+            {% endautoescape %}
+          </div>
+          <div class="history-buttons">
+            <button class="history-button history-expand-button" onclick="expandHistoryItem(this, 'expanded-history-item-{{ obj.get_class_name }}-{{ obj.id }}')">expand</button>
+            <button class="history-button" onclick="editHistoryItem('{{ obj.get_class_name }}', '{{ obj.id }}', '{{ obj.summary }}')">edit</button>
+          </div>
         </li>
       {% endfor %}
     </ul>
   </div>
+  <script src="{% static 'js/question.js' %}"></script>
 {% endblock content %}
