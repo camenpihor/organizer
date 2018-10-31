@@ -6,10 +6,8 @@ To organize my questioning, answering, musing, and listing
 
 ## Questions
 - /question/id
-    - can edit old history items in main editor
     - make history sortable by type and ranking
     - add question creation date
-    - update models.Model base class to include get_class_name and get_form_fields methods
     - perhaps shadowfox theme for night
 - unit tests
 - /archive
