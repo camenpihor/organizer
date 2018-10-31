@@ -17,8 +17,8 @@ def question(request, question_id):
     if request.method == "POST":
         form = request.POST
         try:
-            view_utils.persist_model_object(form, question_id)
-            return redirect('question', question_id=context['question'].id)
+            view_utils.persist_model_object(form, context['question'])
+            return redirect('question', question_id=question_id)
         except AssertionError as e:
             context['error_message'] = str(e)
             context['form_text'] = form['text-input']

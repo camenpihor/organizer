@@ -5,10 +5,49 @@ import pytz
 
 from django.contrib import messages
 from django.db import models
+from django.forms.models import model_to_dict
+
+
+class Base(models.Model):
+    # TODO can I get a list of foreignkey objects and save them so that I can factor out the save method?
+    form_attributes = list()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.form_attributes:
+            raise NotImplementedError("Model needs to initialize `form_attributes`")
+
+    def create_form(self):
+        form = ""
+        for title, text in model_to_dict(self, fields=self.form_attributes).items():
+            form += f"# {title.capitalize()}\n\n{text}\n\n"
+        return form
+
+    @staticmethod
+    def find_attribute(attribute, form_sections):
+        for section in form_sections:
+            section = section.strip()
+            if section.lower().startswith(attribute):
+                return section[len(attribute):].strip()
+        raise AssertionError(f'No section matches "{attribute.capitalize()}"')
+
+    def save_from_form(self, form):
+        form_sections = form.strip().split("#")
+        form_attributes = {
+            attribute: self.find_attribute(attribute, form_sections) for attribute in self.form_attributes
+        }
+        for attribute, value in form_attributes.items():
+            setattr(self, attribute, value)
+        self.save()
+
+    def get_class_name(self):
+        return self.__class__.__name__.lower()
+
+    class Meta:
+        abstract = True
 
 
 class Question(models.Model):
-    # Base
     created_at_utc = models.DateTimeField(auto_now_add=True)
     updated_at_utc = models.DateTimeField(blank=True)
     author = models.TextField()
@@ -27,10 +66,6 @@ class Question(models.Model):
             key=lambda obj: obj.created_at_utc
         )
 
-    @staticmethod
-    def get_form_fields():
-        return ['author', 'question', 'rating']
-
     def save(self, *args, **kwargs):
         self.updated_at_utc = datetime.now(tz=pytz.timezone("UTC"))  # datetime.utcnow() returns a naive datetime
         super().save(*args, **kwargs)
@@ -39,13 +74,13 @@ class Question(models.Model):
         db_table = "questions"
 
 
-class Thought(models.Model):
-    # one to many with Question
+class Thought(Base):
     created_at_utc = models.DateTimeField(auto_now_add=True)
     updated_at_utc = models.DateTimeField(blank=True)
     summary = models.TextField()
     thought = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    form_attributes = ['summary', 'thought']
 
     def save(self, *args, **kwargs):
         if self.thought and self.summary:
@@ -55,25 +90,18 @@ class Thought(models.Model):
         else:
             raise AssertionError("Summary and/or Thought field is not filled out")
 
-    @staticmethod
-    def get_class_name():
-        return "thought"
-
-    @staticmethod
-    def get_form_fields():
-        return ['summary', 'thought']
-
-    class Meta:
+    class Meta(Base.Meta):
         db_table = "thoughts"
 
 
-class Answer(models.Model):
+class Answer(Base):
     # one to many with Question
     created_at_utc = models.DateTimeField(auto_now_add=True)
     updated_at_utc = models.DateTimeField(blank=True)
     summary = models.TextField()
     answer = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    form_attributes = ['summary', 'answer']
 
     def save(self, *args, **kwargs):
         if self.answer and self.summary:
@@ -83,15 +111,7 @@ class Answer(models.Model):
         else:
             raise AssertionError("Summary and/or Answer field is not filled out")
 
-    @staticmethod
-    def get_class_name():
-        return "answer"
-
-    @staticmethod
-    def get_form_fields():
-        return ['summary', 'answer']
-
-    class Meta:
+    class Meta(Base.Meta):
         db_table = "answers"
 
 
@@ -181,7 +201,7 @@ class TopicExplanation(models.Model):
         db_table = "topic_explanation"
 
 
-class Resource(models.Model):
+class Resource(Base):
     # one to many with Question;
     created_at_utc = models.DateTimeField(auto_now_add=True)
     updated_at_utc = models.DateTimeField(blank=True)
@@ -191,6 +211,7 @@ class Resource(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, blank=True, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
     fun_fact = models.ForeignKey(FunFact, on_delete=models.CASCADE, blank=True, null=True)
+    form_attributes = ['summary', 'resource', 'notes']
 
     def save(self, *args, **kwargs):
         if self.summary and self.resource:
@@ -205,13 +226,5 @@ class Resource(models.Model):
         else:
             raise AssertionError("Summary and/or Resource field is not filled out")
 
-    @staticmethod
-    def get_class_name():
-        return "resource"
-
-    @staticmethod
-    def get_form_fields():
-        return ['summary', 'resource', 'notes']
-
-    class Meta:
+    class Meta(Base.Meta):
         db_table = "resources"

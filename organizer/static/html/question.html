@@ -82,7 +82,7 @@
           </div>
           <div class="history-buttons">
             <button class="history-button history-expand-button" onclick="expandHistoryItem(this, 'expanded-history-item-{{ obj.get_class_name }}-{{ obj.id }}')">expand</button>
-            <button class="history-button" onclick="editHistoryItem('{{ obj.get_class_name }}', '{{ obj.id }}', '{{ obj.summary }}')">edit</button>
+            <button class="history-button" onclick="editHistoryItem('{{ obj.get_class_name }}', '{{ obj.id }}', '{{ obj.create_form|escapejs }}')">edit</button>
           </div>
         </li>
       {% endfor %}

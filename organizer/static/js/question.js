@@ -62,13 +62,13 @@ function expandAllHistory() {
   }
 }
 
-function editHistoryItem(objectType, objectID, objectSummary) {
+function editHistoryItem(objectType, objectID, objectForm) {
   console.log("editing history item");
   console.log(objectType);
   console.log(objectID);
   document.getElementById("obj-picker-button").value = objectType;
   document.getElementById("edit-object-id").value = objectID;
   document.getElementById("obj-picker-button").scrollIntoView({behavior: 'smooth'});
-  window.setTimeout(function() {simplemde.codemirror.focus()}, 500);
-  simplemde.codemirror.replaceSelection(objectSummary);
+  window.setTimeout(function() {simplemde.codemirror.focus()}, 1000);
+  simplemde.value(objectForm);
 }

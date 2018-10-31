@@ -125,7 +125,7 @@ button {
 
 .side-nav-item {
   display: block;
-  padding: 0.2em 0 0 1em;
+  padding: 0.2em 0 0.2em 1em;
   cursor: pointer;
 }
 

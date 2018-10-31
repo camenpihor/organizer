@@ -12,16 +12,16 @@ class QuestionForm(forms.ModelForm):
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = models.Resource
-        fields = model.get_form_fields()
+        fields = model.form_attributes
 
 
 class ThoughtForm(forms.ModelForm):
     class Meta:
         model = models.Thought
-        fields = model.get_form_fields()
+        fields = model.form_attributes
 
 
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = models.Answer
-        fields = model.get_form_fields()
+        fields = model.form_attributes
