@@ -70,6 +70,9 @@ class Question(models.Model):
         self.updated_at_utc = datetime.now(tz=pytz.timezone("UTC"))  # datetime.utcnow() returns a naive datetime
         super().save(*args, **kwargs)
 
+    def get_rating(self):
+        return self.num_views + self.rating
+
     class Meta:
         db_table = "questions"
 

@@ -7,8 +7,6 @@ To organize my questioning, answering, musing, and listing
 ## Questions
 - /question/id
     - make history sortable by type and ranking
-    - add question creation date
-    - perhaps shadowfox theme for night
 - unit tests
 - /archive
 - /home

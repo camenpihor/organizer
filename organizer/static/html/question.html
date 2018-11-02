@@ -6,7 +6,11 @@
   <link type="text/css" rel="stylesheet" href="{% static 'css/question.css' %}">
 
   <!-- Question Header -->
-  <h1 id="question-header">" {{ question.question|capfirst }} "</h1>
+  <div id="header">
+    <h1 class="question-header" id="question-title">" {{ question.question|capfirst }} "</h1>
+    <h5 class="question-header" id="question-updated-at">{{ question.updated_at_utc|date:"F j, Y P" }}</h5>
+    <h5 class="question-header" id="question-rating"><< {{ question.get_rating }} >></h5>
+  </div>
 
   <!-- Linked Objects -->
   <div id="linked-objects-lists">

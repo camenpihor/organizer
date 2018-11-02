@@ -1,5 +1,30 @@
-#question-header {
+.question-header {
   text-align: center;
+}
+
+#header {
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
+#question-title {
+  margin-bottom: 0;
+}
+
+#question-title:hover ~ #question-updated-at, #question-title:hover ~ #question-rating {
+  display: block;
+}
+
+#question-updated-at {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  display: none;
+}
+
+#question-rating {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: none;
 }
 
 #linked-objects-lists {
