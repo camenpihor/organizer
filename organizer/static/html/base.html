@@ -1,71 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
 
-<html>
-<head>
-    {% load static %}
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title> Organizer | {{ page_type }} </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-<body>
-  <!-- Top Navigation Bar -->
-  <div id="top-nav">
-    <div id="top-nav-top">
-      <h1 id="page-type">{{ page_type }}</h1>
+      <title> Organizer | {{ page_type }} </title>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <div class="container-fluid" id="top-nav-container">
+      <div class="row" id="page-header">
+        <h1>{{ page_type }}</h1>
+      </div>
+      <div class="row" id="top-nav">
+          <div class="col top-nav-item" onclick="expandSideNav()">></div>
+          <div class="col top-nav-item"><a href="{% url 'home' %}">Home</a></div>
+          <div class="col top-nav-item"><a>Archive</a></div>
+          <div class="col top-nav-item"><a>Create</a></div>
+          <div class="col top-nav-item"><a>Stats</a></div>
+        </ul>
+      </div>
     </div>
-    <div id="top-nav-bottom">
-      <ul id=top-nav-items>
-        <li class="top-nav-item" id="side-nav-toggle" onclick="expandSideNav()">></li>
-        <li class="top-nav-item"><a href="{% url 'home' %}">Home</a></li>
-        <li class="top-nav-item"><a>Archive</a></li>
-        <li class="top-nav-item"><a>Create</a></li>
-        <li class="top-nav-item"><a>Stats</a></li>
+
+    <!-- Side Navigation Bar -->
+    <div id="side-nav">
+      <button type="button" id="side-nav-close-button" onclick="closeSideNav()">X</button>
+      <ul id="side-nav-items">
+        <li class="side-nav-item">Questions</li>
+        <li class="side-nav-item">Topics</li>
+        <li class="side-nav-item">Books</li>
+        <li class="side-nav-item">Facts</li>
       </ul>
     </div>
-  </div>
 
-  <!-- Side Navigation Bar -->
-  <div id="side-nav">
-    <button type="button" id="side-nav-close-button" onclick="closeSideNav()">X</button>
-    <ul id="side-nav-items">
-      <li class="side-nav-item">Questions</li>
-      <li class="side-nav-item">Topics</li>
-      <li class="side-nav-item">Books</li>
-      <li class="side-nav-item">Facts</li>
-    </ul>
-  </div>
-
-  <!-- Content -->
-  <div id="content">
-    {% block content %}{% endblock content %}
-  </div>
-
-  <!-- Status Bar -->
-  {% if status_bar %}
-    <div id="status-bar">
-      <ul id="status-list">
-        <li class="status-item">Text</li>
-        <li class="status-item"><span class="status-count" id="num_words">0</span> words</li>
-        <li class="status-item"><span class="status-count" id="num_characters">0</span> characters</li>
-        <li class="status-item"><span class="status-count" id="num_lines">0</span> lines</li>
-        <li class="status-item"><span class="status-count" id="num_paragraphs">0</span> paragraphs</li>
-      </ul>
+    <!-- Content -->
+    <div id="content">
+      {% block content %}{% endblock content %}
     </div>
-  {% endif %}
 
-  <!-- Scripts -->
-  <script src="{% static 'js/base.js' %}"></script>
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-  <script>var simplemde = new SimpleMDE({
-    tabSize: 4,
-    toolbarTips: false,
-    hideIcons: ["guide"],
-    showIcons: ["table", "horizontal-rule", "strikethrough"],
-    status: [{onUpdate: function() {countChar(simplemde);}}],
-    forceSync: true
-  });</script>
-</body>
+    <!-- Status Bar -->
+    {% if status_bar %}
+      <div id="status-bar">
+        <ul id="status-list">
+          <li class="status-item">Text</li>
+          <li class="status-item"><span class="status-count" id="num_words">0</span> words</li>
+          <li class="status-item"><span class="status-count" id="num_characters">0</span> characters</li>
+          <li class="status-item"><span class="status-count" id="num_lines">0</span> lines</li>
+          <li class="status-item"><span class="status-count" id="num_paragraphs">0</span> paragraphs</li>
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>var simplemde = new SimpleMDE({
+      tabSize: 4,
+      toolbarTips: false,
+      hideIcons: ["guide"],
+      showIcons: ["table", "horizontal-rule", "strikethrough"],
+      status: [{onUpdate: function() {countChar(simplemde);}}],
+      forceSync: true
+    });</script>
+  </body>
 
  </html>

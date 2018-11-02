@@ -1,0 +1,144 @@
+/* General */
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  transition: 0.75s;
+}
+
+a {
+  color: inherit;
+}
+
+select {
+  border: 1px solid #ccc;
+  background-color: rgba(0,0,0,.1);
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 1em;
+  color: inherit;
+  outline: none;
+}
+
+button {
+  background-color: rgba(0,0,0,.1);
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.3em 1em;
+  color: inherit;
+  outline: none;
+}
+
+:focus {
+  outline: none;
+}
+
+/* Base Template Settings */
+
+#top-nav {
+  background: #2c2c2c;
+  padding: 0.5em 0 0 0;
+  color: #b9b9b9;
+  display: block;
+}
+
+#top-nav-top {
+  height: 50%;
+}
+
+#top-nav-bottom {
+  height: 50%;
+}
+
+#page-type {
+  margin: 0 0 0 2em;
+}
+
+#top-nav-items {
+  list-style: none;
+  display: inline-flex;
+  margin: 0 0 0 4em;
+}
+
+.top-nav-item {
+  padding: 0.5em 1em 0.4em 1em;
+  border-right: 1px solid black;
+  margin-top: 0.4em;
+  cursor: pointer;
+}
+
+.top-nav-item a {
+  text-decoration: none;
+}
+
+.top-nav-item:hover {
+  background: rgba(89, 89, 89, 0.303);
+  color: white;
+}
+
+#status-bar {
+  background: #007acc;
+  color: white;
+  display: block;
+  position: fixed;
+  width: 100%;
+  bottom: 0%;
+}
+
+#status-list {
+  padding-left: 0.3em;
+  list-style: none;
+  display: inline-flex;
+  margin: 0;
+}
+
+.status-item {
+  padding: 0.2em 0.8em 0.2em 0em;
+  font-size: 0.8em;
+}
+
+.status-count {
+  font-weight: bold;
+}
+
+#side-nav {
+  position: fixed;
+  height: 100%;
+  width: 330px;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  transform: translate(-70vw, 0px);
+  overflow-x: hidden;
+  transition: 0.75s;
+  font-size: 3em;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
+}
+
+#side-nav-items {
+  list-style: none;
+  margin-top: 2em;
+}
+
+.side-nav-item {
+  display: block;
+  padding: 0.2em 0 0.2em 1em;
+  cursor: pointer;
+}
+
+.side-nav-item:hover {
+  background-color: rgba(0,0,0,.1);
+}
+
+#side-nav-close-button {
+  float: right;
+  font-size: 0.5em;
+  padding: 0.5em 1em;
+}
+
+.editor-statusbar {
+  display: none;
+}
