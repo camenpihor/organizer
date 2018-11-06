@@ -45,8 +45,8 @@ To aid my bad memory, I want to produce stats for each core object and the globa
 # To Do
 
 1. Structure Backend
-    - create core object models
-    - create supporting object models
+    - ~~create core object models~~
+    - ~~create supporting object models~~
     - create pages (home, archive, item, stats)
 
 2. Navigation
