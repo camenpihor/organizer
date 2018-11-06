@@ -34,14 +34,19 @@ class Question(CoreObject):
     class Meta(CoreObject.Meta):
         db_table = "core_questions"
 
+
 class Book(CoreObject):
     author = models.TextField()
     title = models.TextField()
     url = models.URLField(null=True, blank=True)
     status = models.TextField(
         default='to_read',
-        choices=(('to_read', 'To Read'), ('finished', 'Finished'), ('currently_reading', 'Currently Reading'),
-            ('stopped', 'Stopped'))
+        choices=(
+            ('to_read', 'To Read'),
+            ('finished', 'Finished'),
+            ('currently_reading', 'Currently Reading'),
+            ('stopped', 'Stopped')
+        )
     )
     books = None
 
