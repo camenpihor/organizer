@@ -42,7 +42,6 @@ I also like games. I plan to integrate **streaks** and other games so that I can
 
 To aid my bad memory, I want to produce stats for each core object and the global site usage.
 
-
 # To Do
 
 1. Structure Backend
