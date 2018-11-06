@@ -48,10 +48,12 @@ To aid my bad memory, I want to produce stats for each core object and the globa
     - ~~create core object models~~
     - ~~create supporting object models~~
     - create pages (home, archive, item, stats)
+    - test
 
 2. Navigation
     - create top navigation
     - create side navigation
+    - test
 
 3. Content
     - come up with dummy objects and persist to database
@@ -61,3 +63,4 @@ To aid my bad memory, I want to produce stats for each core object and the globa
     - Item
     - Archive
     - Stats
+    - test
