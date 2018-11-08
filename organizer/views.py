@@ -1,1 +1,17 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
+
+
+def home(request, core_object_type):
+    return
+
+
+def archive(request, core_object_type):
+    return
+
+
+def stats(request, core_object_type):
+    return
+
+
+def item(request, core_object_type):
+    return
