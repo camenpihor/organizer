@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from django.contrib.postgres import fields
 from django.db import models
 import pytz
 
 from .core_models import Question, Book, Fact, Word, Topic
+
 
 class SupportingObject(models.Model):
     created_at_utc = models.DateTimeField(auto_now_add=True)

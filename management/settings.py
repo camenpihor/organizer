@@ -7,7 +7,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     os.environ['MAIN_IP_ADDRESS'],
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    'djangotestclient'
 ]
 
 INSTALLED_APPS = [
@@ -66,6 +67,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+DEFAULT_CHARSET = 'utf-8'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
