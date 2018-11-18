@@ -48,7 +48,7 @@ To aid my bad memory, I want to produce stats for each core object and the globa
     - ~~create core object models~~
     - ~~create supporting object models~~
     - ~~create pages (home, archive, item, stats)~~
-    - test
+    - ~~test~~
 
 2. Navigation
     - create top navigation
