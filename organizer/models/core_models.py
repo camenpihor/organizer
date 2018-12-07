@@ -1,7 +1,11 @@
-from django.contrib.postgres import fields
-from django.db import models
+"""Models of the organizer's core objects.
+
+"""
 
 from datetime import datetime
+
+from django.contrib.postgres import fields
+from django.db import models
 import pytz
 
 
@@ -12,12 +16,12 @@ class CoreObject(models.Model):
     num_views = models.PositiveIntegerField(default=0)
     rating = models.PositiveIntegerField(default=0)
 
-    # Example use: `Question.book_set.all()` or `Question.objects.filter(book_instance="x")`
-    questions = models.ManyToManyField('Question', related_query_name="question_instance")
-    books = models.ManyToManyField('Book', related_query_name="book_instance")
-    topics = models.ManyToManyField('Topic', related_query_name="topic_instance")
-    facts = models.ManyToManyField('Fact', related_query_name="fact_instance")
-    words = models.ManyToManyField('Word', related_query_name="word_instance")
+    # Example: `Question.book_set.all()` or `Question.objects.filter(book_instance="x")`
+    questions = models.ManyToManyField("Question", related_query_name="question_instance")
+    books = models.ManyToManyField("Book", related_query_name="book_instance")
+    topics = models.ManyToManyField("Topic", related_query_name="topic_instance")
+    facts = models.ManyToManyField("Fact", related_query_name="fact_instance")
+    words = models.ManyToManyField("Word", related_query_name="word_instance")
 
     def save(self, *args, **kwargs):
         self.updated_at_utc = datetime.now(tz=pytz.timezone("UTC"))
@@ -40,13 +44,13 @@ class Book(CoreObject):
     title = models.TextField()
     url = models.URLField(null=True, blank=True)
     status = models.TextField(
-        default='to_read',
+        default="to_read",
         choices=(
-            ('to_read', 'To Read'),
-            ('finished', 'Finished'),
-            ('currently_reading', 'Currently Reading'),
-            ('stopped', 'Stopped')
-        )
+            ("to_read", "To Read"),
+            ("finished", "Finished"),
+            ("currently_reading", "Currently Reading"),
+            ("stopped", "Stopped"),
+        ),
     )
     books = None
 
@@ -65,7 +69,9 @@ class Topic(CoreObject):
 class Word(CoreObject):
     word = models.TextField()
     definition = models.TextField()
-    examples = fields.ArrayField(base_field=models.TextField(blank=True, null=True), blank=True, null=True)
+    examples = fields.ArrayField(
+        base_field=models.TextField(blank=True, null=True), blank=True, null=True
+    )
     words = None
 
     class Meta(CoreObject.Meta):
@@ -76,7 +82,11 @@ class Fact(CoreObject):
     fact = models.TextField()
     status = models.TextField(
         default="not_verified",
-        choices=(("not_verified", "Not Verified"), ("confirmed", "confirmed"), ("false", "False"))
+        choices=(
+            ("not_verified", "Not Verified"),
+            ("confirmed", "confirmed"),
+            ("false", "False"),
+        ),
     )
     facts = None
 
